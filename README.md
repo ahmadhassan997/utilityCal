@@ -1,6 +1,7 @@
 # Setup to run Sprout and Verus with Mahimahi
 
 > Utility plots can be found in [plots](plots) directory
+
 > scripts to calculate utility can be found in [scripts](scripts/utility.py)
 
 ## Utility Functions
@@ -18,11 +19,17 @@ Here, __*t*__ = throughput and __*d*__ = delay
 
 U(t, d) = log(t) - delta * log(d)
 
+where delta = 0.001 (value can be adjusted)
+
 ### Utility Function 2
 
 **PCC Vivace Congestion Control**
 
 U(t, d) = t^a - b * t * d(d)/dt
+
+d(d)/dt = Delay Gradient i.e. change in delay experienced from last bin
+
+where a = 1, b = 0.1 (values can be adjusted)
 
 ### Utility Function 3
 
