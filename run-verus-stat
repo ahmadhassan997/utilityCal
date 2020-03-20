@@ -1,0 +1,34 @@
+#!/usr/bin/perl -w
+
+use strict;
+use Cwd;
+my $dir = getcwd;
+$ENV{'dir'} = $dir;
+
+my $r_param = 2;
+for ($r_param=2;$r_param<7;$r_param+=2) {
+    $ENV{'r_param'} = $r_param;
+    print "Using R=$r_param\n";
+    my $receiver_pid = fork;
+
+    if ( $receiver_pid < 0 ) {
+      die qq{$!};
+    } elsif ( $receiver_pid == 0 ) {
+      # child
+      exec '$dir/verus-custom/src/verus_server -name test -p 6100 -r $r_param -t 1000' or die qq{$!};
+    }
+
+    my @command = split(" ","mm-delay 20 mm-link $dir/mahimahi/traces/stationary-0.100000-uplink-2.000000-0.010000.dat.out $dir/mahimahi/traces/stationary-0.100000-downlink-2.000000-0.010000.dat.out --uplink-queue=droptail --downlink-queue=droptail --uplink-queue-args=bytes=12000 --downlink-queue-args=bytes=10000 --once --downlink-log=$dir/logs/verus".$r_param."_stat_log.down --uplink-log=$dir/logs/verus".$r_param."_stat_log.up -- sh -c");
+
+    push @command, '$dir/verus-custom/src/verus_client $MAHIMAHI_BASE -p 6100';
+
+    system @command;
+
+    # kill the receiver
+    kill 'INT', $receiver_pid;
+	
+	system 'pkill -f "verus_client"';
+	system 'pkill -f "verus_server"';
+
+    print "\n";
+}

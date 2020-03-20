@@ -1,0 +1,21 @@
+#!/usr/bin/perl -w
+
+# sudo sysctl -w net.ipv4.ip_forward=1
+
+use strict;
+use Cwd;
+my $dir = getcwd;
+$ENV{'dir'} = $dir;
+
+# run experiments
+system '$dir/run-verus-stat';
+
+system '$dir/run-sprout-stat';
+
+# create plots
+
+# stationary
+# system 'mm-throughput-graph 5 $dir/logs/sprout_stat_log.down > $dir/plots/sprout_stat_tput.html'
+
+# system 'mm-tput-dual-graph 500 $dir/logs/verus6_verizon_log $dir/logs/sprout_verizon_log > $dir/plots/sprout_verus_verizon_tput.html';
+# system 'mm-tput-delay-graph 500 $dir/logs/sprout_verizon_log $dir/logs/verus2_verizon_log $dir/logs/verus4_verizon_log $dir/logs/verus6_verizon_log > $dir/plots/sprout_verus_verizon_tput_delay.html';
