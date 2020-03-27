@@ -41,6 +41,18 @@ pRTT = 5 * 10^-4 * |avg_dealy - min_delay| (penalty for latency)
 
 ## Installation Guide
 
+Download Mahimahi from:
+
+``` bash
+git clone https://github.com/ravinet/mahimahi
+```
+
+Download Sprout from:
+
+``` bash
+git clone https://github.com/keithw/sprout.git
+```
+
 ### Essential Libraries
 
 ``` bash
