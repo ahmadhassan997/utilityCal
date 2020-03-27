@@ -60,7 +60,7 @@ def calculate_utility(files_list, util_func = 2):
         with open(filename) as file_object:
             arrival, departure, capacity, delay = util._parse_file(file_object)
             utility_values = utility_mapper(departure, delay, util_func)
-            util._print_(utility_values)
+            # util._print_(utility_values)
             stats[filename] = util.cal_average_util(utility_values)
     return stats
 
@@ -83,7 +83,7 @@ def barplot(utility_stats_1, utility_stats_2, utility_stats_3, _title, _name):
     ax.set_title(_title)
     plt.legend()
     plt.savefig("./../plots/" + _name + ".png", dpi=300, format='png', bbox_inches='tight')
-    plt.show()
+    # plt.show()
     
 
 def scale(utility_stats):
@@ -131,9 +131,11 @@ if __name__ == "__main__":
     # att_up_stats_1 = scale(calculate_utility(att_up_files, 1))
     # att_up_stats_2 = scale(calculate_utility(att_up_files, 2))
     # att_up_stats_3 = scale(calculate_utility(att_up_files, 3))
-    # att_down_stats_1 = scale(calculate_utility(att_down_files, 1))
-    # att_down_stats_2 = scale(calculate_utility(att_down_files, 2))
-    # att_down_stats_3 = scale(calculate_utility(att_down_files, 3))
+    att_down_stats_1 = scale(calculate_utility(att_down_files, 1))
+    att_down_stats_2 = scale(calculate_utility(att_down_files, 2))
+    att_down_stats_3 = scale(calculate_utility(att_down_files, 3))
     
+    # barplot(stat_up_stats_1, stat_up_stats_2, stat_up_stats_3, "Stationary UpLink Utilities Comparison", "uplink-stat")
     barplot(stat_down_stats_1, stat_down_stats_2, stat_down_stats_3, "Stationary DownLink Utilities Comparison", "downlink-stat")
-    # barplot(att_down_stats_1, att_down_stats_2, att_down_stats_3, "AT&T DownLink Utilities Comparison", "downlink-att")
+    # barplot(att_up_stats_1, att_up_stats_2, att_up_stats_3, "AT&T UpLink Utilities Comparison", "uplink-att")    
+    barplot(att_down_stats_1, att_down_stats_2, att_down_stats_3, "AT&T DownLink Utilities Comparison", "downlink-att")
