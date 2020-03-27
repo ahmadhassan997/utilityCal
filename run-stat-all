@@ -7,10 +7,19 @@ use Cwd;
 my $dir = getcwd;
 $ENV{'dir'} = $dir;
 
-# run experiments
+# run stationary experiments
 system '$dir/run-verus-stat';
-
 system '$dir/run-sprout-stat';
+system '$dir/run-cubic-stat';
+system '$dir/run-reno-stat';
+
+#run AT&T stats
+system '$dir/run-verus-att';
+system '$dir/run-sprout-att';
+system '$dir/run-cubic-att';
+system '$dir/run-reno-att';
+
+
 
 # create plots
 
