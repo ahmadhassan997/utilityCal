@@ -14,7 +14,7 @@ if ( $receiver_pid < 0 ) {
   exec '$dir/tcp/tcp_server.py 5050' or die qq{$!};
 }
 
-my @command = split(" ","mm-delay 20 mm-link $dir/mahimahi/traces/ATT-LTE-driving-2016.up $dir/mahimahi/traces/ATT-LTE-driving-2016.down --uplink-queue=droptail --downlink-queue=droptail --uplink-queue-args=bytes=120000 --downlink-queue-args=bytes=120000 --once --downlink-log=$dir/logs/cubic_att_log.down --uplink-log=$dir/logs/cubic_att_log.up -- sh -c");
+my @command = split(" ","mm-delay 20 mm-link $dir/mahimahi/traces/ATT-LTE-driving-2016.up $dir/mahimahi/traces/ATT-LTE-driving-2016.down --uplink-queue=droptail --downlink-queue=droptail --uplink-queue-args=bytes=120000 --downlink-queue-args=bytes=120000 --once --downlink-log=$dir/logs/cubic_att_log.up --uplink-log=$dir/logs/cubic_att_log.down -- sh -c");
 
 push @command, '$dir/tcp/tcp_client.py 5050 1';
 

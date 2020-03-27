@@ -21,7 +21,7 @@ open my $file, '<', "port.txt" or die "Failed to open port file.";
 $ENV{'SPROUT_PORT'} = <$file>;    
 close $file;
 
-my @command = split(" ","mm-delay 20 mm-link $dir/mahimahi/traces/ATT-LTE-driving-2016.up $dir/mahimahi/traces/ATT-LTE-driving-2016.down --uplink-queue=droptail --downlink-queue=droptail --uplink-queue-args=bytes=12000 --downlink-queue-args=bytes=12000 --once --downlink-log=$dir/logs/sprout_att_log.down --uplink-log=$dir/logs/sprout_att_log.up -- sh -c");
+my @command = split(" ","mm-delay 20 mm-link $dir/mahimahi/traces/ATT-LTE-driving-2016.up $dir/mahimahi/traces/ATT-LTE-driving-2016.down --uplink-queue=droptail --downlink-queue=droptail --uplink-queue-args=bytes=12000 --downlink-queue-args=bytes=12000 --once --downlink-log=$dir/logs/sprout_att_log.up --uplink-log=$dir/logs/sprout_att_log.down -- sh -c");
 push @command, '$dir/sprout/src/examples/sproutbt2 $MAHIMAHI_BASE $SPROUT_PORT';
 
 system @command;

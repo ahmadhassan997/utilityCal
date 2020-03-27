@@ -14,7 +14,7 @@ if ( $receiver_pid < 0 ) {
   exec '$dir/tcp/tcp_server.py 5050' or die qq{$!};
 }
 
-my @command = split(" ","mm-delay 20 mm-link $dir/mahimahi/traces/stationary-0.100000-uplink-2.000000-0.010000.dat.out $dir/mahimahi/traces/stationary-0.100000-downlink-2.000000-0.010000.dat.out --uplink-queue=droptail --downlink-queue=droptail --uplink-queue-args=bytes=120000 --downlink-queue-args=bytes=120000 --once --downlink-log=$dir/logs/reno_stat_log.down --uplink-log=$dir/logs/reno_stat_log.up -- sh -c");
+my @command = split(" ","mm-delay 20 mm-link $dir/mahimahi/traces/stationary-0.100000-uplink-2.000000-0.010000.dat.out $dir/mahimahi/traces/stationary-0.100000-downlink-2.000000-0.010000.dat.out --uplink-queue=droptail --downlink-queue=droptail --uplink-queue-args=bytes=120000 --downlink-queue-args=bytes=120000 --once --downlink-log=$dir/logs/reno_stat_log.up --uplink-log=$dir/logs/reno_stat_log.down -- sh -c");
 
 push @command, '$dir/tcp/tcp_client.py 5050 0';
 
