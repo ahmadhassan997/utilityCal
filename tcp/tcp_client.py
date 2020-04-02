@@ -9,7 +9,7 @@ import struct
 import thread
 
 
-SAVE_CWND = 1
+SAVE_CWND = 0
 TCP_CONGESTION = 13
 ADDRESS = os.environ.get("MAHIMAHI_BASE") or "127.0.0.1"
 if len(sys.argv) != 3:
