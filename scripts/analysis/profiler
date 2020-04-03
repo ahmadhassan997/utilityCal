@@ -1,0 +1,10 @@
+#! /usr/bin/python3
+import sys
+import numpy as np
+import matplotlib.pyplot as plt
+
+if __name__=="__main__":
+    file  = sys.argv[1]
+    delay = np.loadtxt(file)
+    plt.plot(delay)
+    plt.show()

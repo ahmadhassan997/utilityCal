@@ -4,7 +4,7 @@
 
 > Utility plots can be found in [plots](plots) directory
 
-> scripts to calculate utility can be found in [scripts](scripts/utility.py)
+> scripts to calculate utility can be found in [scripts](scripts/analysis/utility.py)
 
 ## Utility Functions
 
