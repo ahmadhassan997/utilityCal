@@ -7,8 +7,6 @@ if __name__=="__main__":
     if (len(sys.argv) != 6):
         print ("Usage: ./artificial_traces OUTPUT_FILE TIME(secs) MIN_T MAX_T TYPE(S/L/H)")
         exit()
-    else:
-        print ("Generating Artificial Traces")
     FILE = sys.argv[1]
     INTERVAL = int(sys.argv[2])
     MIN_T = int(sys.argv[3])
@@ -27,7 +25,7 @@ if __name__=="__main__":
                         ofile_d.write(str(timestamp) + "\n")
                     ofile_t.write(str(timestamp) + " " + str(t_put) + "\n")
                     timestamp += 10
-        if TYPE == "L": # Normal Handoffs
+        if TYPE == "N": # Normal Handoffs
             for i in range(INTERVAL):
                 for i in range(100):
                     if i in range(48, 52) and INTERVAL % 20 == 0:
@@ -40,7 +38,7 @@ if __name__=="__main__":
                         ofile_d.write(str(timestamp) + "\n")
                     ofile_t.write(str(timestamp) + " " + str(t_put) + "\n")
                     timestamp += 10
-        if TYPE == "H": # Frequent Handoffs
+        if TYPE == "F": # Frequent Handoffs
             for i in range(INTERVAL):
                 for i in range(100):
                     if i in range(48, 52) and INTERVAL % 5 == 0:
