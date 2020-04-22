@@ -6,6 +6,14 @@
 
 > scripts to calculate utility can be found in [scripts](scripts/analysis/utility.py)
 
+## Plots
+
+![Stationary](plots/handoffs/stationary-15-20.png)
+
+![Normal Handoffs](plots/handoffs/normal-15-20.png)
+
+![Frequent Handoffs](plots/handoffs/frequent-15-20.png)
+
 ## Utility Functions
 
 To calculate the utilities for each protocol, time has been divided into
