@@ -82,7 +82,7 @@ def barplot(utility_stats_1, utility_stats_2, utility_stats_3, _title, _name):
     ax.set_ylabel('Utility Values')
     ax.set_title(_title)
     plt.legend()
-    plt.savefig("./../../plots/" + _name + ".png", dpi=300, format='png', bbox_inches='tight')
+    plt.savefig("./../../plots/handoffs/" + _name + ".png", dpi=300, format='png', bbox_inches='tight')
     # plt.show()
     
 
@@ -97,45 +97,45 @@ def scale(utility_stats):
     return temp
 
 if __name__ == "__main__":
+    stationary_down_files = ["./../../logs/sprout_stationary-15-20.down",
+                            "./../../logs/verus2_stationary-15-20.down",
+                            "./../../logs/verus4_stationary-15-20.down",
+                            "./../../logs/verus6_stationary-15-20.down",
+                            "./../../logs/cubic_stationary-15-20.down",
+                            "./../../logs/reno_stationary-15-20.down"]
+    normal_down_files =     ["./../../logs/sprout_normal-15-20.down",
+                            "./../../logs/verus2_normal-15-20.down",
+                            "./../../logs/verus4_normal-15-20.down",
+                            "./../../logs/verus6_normal-15-20.down",
+                            "./../../logs/cubic_normal-15-20.down",
+                            "./../../logs/reno_normal-15-20.down"]
+    frequent_down_files =   ["./../../logs/sprout_frequent-15-20.down",
+                            "./../../logs/verus2_frequent-15-20.down",
+                            "./../../logs/verus4_frequent-15-20.down",
+                            "./../../logs/verus6_frequent-15-20.down",
+                            "./../../logs/cubic_frequent-15-20.down",
+                            "./../../logs/reno_frequent-15-20.down"]
 
-    att_up_files =  ["./../logs/sprout_att_log.up",
-                "./../logs/verus2_att_log.up",
-                "./../logs/verus4_att_log.up",
-                "./../logs/verus6_att_log.up",
-                "./../logs/cubic_att_log.up",
-                "./../logs/reno_att_log.up"]
-    att_down_files = ["./../logs/sprout_att_log.down",
-                  "./../logs/verus2_att_log.down",
-                  "./../logs/verus4_att_log.down",
-                  "./../logs/verus6_att_log.down",
-                  "./../logs/cubic_att_log.down",
-                  "./../logs/reno_att_log.down"]
-    stat_up_files =  ["./../logs/sprout_stat_log.up",
-                "./../logs/verus2_stat_log.up",
-                "./../logs/verus4_stat_log.up",
-                "./../logs/verus6_stat_log.up",
-                "./../logs/cubic_stat_log.up",
-                "./../logs/reno_stat_log.up"]
-    stat_down_files = ["./../logs/sprout_stat_log.down",
-                  "./../logs/verus2_stat_log.down",
-                  "./../logs/verus4_stat_log.down",
-                  "./../logs/verus6_stat_log.down",
-                  "./../logs/cubic_stat_log.down",
-                  "./../logs/reno_stat_log.down"]
-    # stat_up_stats_1 = scale(calculate_utility(stat_up_files, 1))
-    # stat_up_stats_2 = scale(calculate_utility(stat_up_files, 2))
-    # stat_up_stats_3 = scale(calculate_utility(stat_up_files, 3))
-    stat_down_stats_1 = scale(calculate_utility(stat_down_files, 1))
-    stat_down_stats_2 = scale(calculate_utility(stat_down_files, 2))
-    stat_down_stats_3 = scale(calculate_utility(stat_down_files, 3))
-    # att_up_stats_1 = scale(calculate_utility(att_up_files, 1))
-    # att_up_stats_2 = scale(calculate_utility(att_up_files, 2))
-    # att_up_stats_3 = scale(calculate_utility(att_up_files, 3))
-    att_down_stats_1 = scale(calculate_utility(att_down_files, 1))
-    att_down_stats_2 = scale(calculate_utility(att_down_files, 2))
-    att_down_stats_3 = scale(calculate_utility(att_down_files, 3))
-    
-    # barplot(stat_up_stats_1, stat_up_stats_2, stat_up_stats_3, "Stationary UpLink Utilities Comparison", "uplink-stat")
-    barplot(stat_down_stats_1, stat_down_stats_2, stat_down_stats_3, "Stationary DownLink Utilities Comparison", "downlink-stat")
-    # barplot(att_up_stats_1, att_up_stats_2, att_up_stats_3, "AT&T UpLink Utilities Comparison", "uplink-att")    
-    barplot(att_down_stats_1, att_down_stats_2, att_down_stats_3, "AT&T DownLink Utilities Comparison", "downlink-att")
+    # ## Stationary Traces
+    print ("Making graphs for stationary traces")
+    stationary_down_stats_1 = scale(calculate_utility(stationary_down_files, 1))
+    stationary_down_stats_2 = scale(calculate_utility(stationary_down_files, 2))
+    stationary_down_stats_3 = scale(calculate_utility(stationary_down_files, 3))
+    barplot(stationary_down_stats_1, stationary_down_stats_2, stationary_down_stats_3,
+                     "Stationary DownLink Utilities Comparison", "downlink-stationary")
+
+    # Normal Handoffs
+    print ("Making graphs for normal handoff traces")
+    normal_down_stats_1 = scale(calculate_utility(normal_down_files, 1))
+    normal_down_stats_2 = scale(calculate_utility(normal_down_files, 2))
+    normal_down_stats_3 = scale(calculate_utility(normal_down_files, 3))
+    barplot(normal_down_stats_1, normal_down_stats_2, normal_down_stats_3,
+                     "Normal Handoffs DownLink Utilities Comparison", "downlink-normal")
+
+    ## Frequent Handoffs
+    print ("Making graphs for frequent handoff traces")
+    frequent_down_stats_1 = scale(calculate_utility(frequent_down_files, 1))
+    frequent_down_stats_2 = scale(calculate_utility(frequent_down_files, 2))
+    frequent_down_stats_3 = scale(calculate_utility(frequent_down_files, 3))
+    barplot(frequent_down_stats_1, frequent_down_stats_2, frequent_down_stats_3, 
+                    "Frequent Handoffs DownLink Utilities Comparison", "downlink-frequent")
