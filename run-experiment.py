@@ -7,23 +7,24 @@ if __name__ == "__main__":
     print ("So sit back and relax or you can complete your other assignments.") 
     print ("I know you've been procrastinating!\n")
     # set the forwarding port
-    os.system("sudo sysctl -w net.ipv4.ip_forward=1")
-    curr_dir = os.getcwd()
-    wk_dir = curr_dir + "/scripts/run/"
+    # os.system("sudo sysctl -w net.ipv4.ip_forward=1")
+    # curr_dir = os.getcwd()
+    # wk_dir = curr_dir + "/scripts/run/"
 
-    # RUN STATIONARY TRACE EXPERIMENTS
-    os.system(wk_dir + "run-verus-stat")
-    os.system(wk_dir + "run-sprout-stat")
-    os.system(wk_dir + "run-cubic-stat")
-    os.system(wk_dir + "run-reno-stat")
+    # # RUN STATIONARY TRACE EXPERIMENTS
+    # os.system(wk_dir + "run-verus-stat")
+    # os.system(wk_dir + "run-sprout-stat")
+    # os.system(wk_dir + "run-cubic-stat")
+    # os.system(wk_dir + "run-reno-stat")
 
 
-    # RUN AT&T TRACE EXPERIMENT
-    os.system(wk_dir + "run-verus-att")
-    os.system(wk_dir + "run-sprout-att")
-    os.system(wk_dir + "run-cubic-att")
-    os.system(wk_dir + "run-reno-att")
+    # # RUN AT&T TRACE EXPERIMENT
+    # os.system(wk_dir + "run-verus-att")
+    # os.system(wk_dir + "run-sprout-att")
+    # os.system(wk_dir + "run-cubic-att")
+    # os.system(wk_dir + "run-reno-att")
 
+    os.system("./mahimahi/scripts/mm-throughput-graph 500 ./logs/sprout_att_log.up")
 
     # create plots
     # mm-throughput-graph bin log

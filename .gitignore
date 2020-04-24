@@ -4,3 +4,4 @@ mahimahi/
 sprout/
 logs/
 __pycache__/
+*.html
