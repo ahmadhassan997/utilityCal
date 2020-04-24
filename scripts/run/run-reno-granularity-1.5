@@ -1,0 +1,27 @@
+#!/usr/bin/perl -w
+
+use strict;
+use Cwd;
+my $dir = getcwd;
+$ENV{'dir'} = $dir;
+
+my $receiver_pid = fork;
+
+if ( $receiver_pid < 0 ) {
+  die qq{$!};
+} elsif ( $receiver_pid == 0 ) {
+  # child
+  exec '$dir/tcp/tcp_server.py 5050' or die qq{$!};
+}
+
+my @command = split(" ","mm-delay 20 mm-link $dir/mahimahi/traces/stationary-15-20-1.5-delay $dir/mahimahi/traces/stationary-15-20-1.5-delay --uplink-queue=droptail --downlink-queue=droptail --uplink-queue-args=bytes=120000 --downlink-queue-args=bytes=120000 --once --downlink-log=$dir/logs/reno_stationary-15-20-1.5.up --uplink-log=$dir/logs/reno_stationary-15-20-1.5.down -- sh -c");
+
+push @command, '$dir/tcp/tcp_client.py 5050 0';
+
+system @command;
+
+# kill the receiver
+kill 'INT', $receiver_pid;
+system 'pkill -f "tcp_server"';
+system 'pkill -f "tcp_client"';
+print "\n";
