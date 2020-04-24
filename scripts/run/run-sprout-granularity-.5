@@ -1,0 +1,34 @@
+#!/usr/bin/perl -w
+
+use strict;
+use Cwd;
+
+my $dir = getcwd;
+$ENV{'dir'} = $dir;
+$ENV{'SPROUT_MODEL_IN'} = "$dir/sprout/src/examples/sprout.model";
+
+my $receiver_pid = fork;
+
+if ( $receiver_pid < 0 ) {
+  die qq{$!};
+} elsif ( $receiver_pid == 0 ) {
+  # child
+  exec '$dir/sprout/src/examples/sproutbt2' or die qq{$!};
+}
+
+# Obtain the port elected in the exec call above and use it next, otherwise sprout misbehaves.
+open my $file, '<', "port.txt" or die "Failed to open port file.";
+$ENV{'SPROUT_PORT'} = <$file>;    
+close $file;
+
+my @command = split(" ","mm-delay 20 mm-link $dir/mahimahi/traces/stationary-15-20-0.5-delay $dir/mahimahi/traces/stationary-15-20-0.5-delay --uplink-queue=droptail --downlink-queue=droptail --uplink-queue-args=bytes=120000 --downlink-queue-args=bytes=120000 --once --uplink-log=$dir/logs/sprout_stationary-15-20-0.5.down --downlink-log=$dir/logs/sprout_stationary-15-20-0.5.up -- sh -c");
+push @command, '$dir/sprout/src/examples/sproutbt2 $MAHIMAHI_BASE $SPROUT_PORT';
+
+system @command;
+
+# kill the receiver
+kill 'INT', $receiver_pid;
+
+system 'pkill -f "sproutbt2"';
+
+print "\n";
