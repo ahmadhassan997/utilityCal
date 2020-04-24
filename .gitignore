@@ -5,3 +5,4 @@ sprout/
 logs/
 __pycache__/
 *.html
+verus-custom/
